@@ -1,0 +1,18 @@
+.div{
+    background-image: url(../cards/galaix.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    overflow: auto;
+    flex-wrap: wrap;
+}
