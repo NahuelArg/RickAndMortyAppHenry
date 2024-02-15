@@ -40,17 +40,17 @@ export default function Card({ origin, status, id, species, gender, image, name,
   return (
     <div className={style.container}>
       <section className={style.firstSection}>
-      {
+        <div className={style.imageContainer}>
+          <img className={style.image} src={image} alt='' loading="lazy" />
+          <button className={style.btn} onClick={() => onClose(id)}>X</button>
+        </div>
+        {
         isFav ? (
         <button className={style.fav} onClick={handleFavorite}>❤️</button>
          ) : (
         <button className={style.fav} onClick={handleFavorite}>🤍</button>
            )
              }
-        <div className={style.imageContainer}>
-          <img className={style.image} src={image} alt='' loading="lazy" />
-          <button className={style.btn} onClick={() => onClose(id)}>X</button>
-        </div>
         <div className={style.name}>
           <Link to={`/detail/${id}`} className={style.link}>{name}</Link>
         </div>
