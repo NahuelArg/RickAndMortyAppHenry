@@ -1,20 +1,27 @@
-import styles from './About.module.css';
+import React from 'react';
+import { FaLinkedin, FaWhatsapp } from 'react-icons/fa';
+import style from "./About.module.css";
 
-
-const { card, cardBody, cardContent, imageContainer, cardFooter } = styles;
-
-export default function About() {
+const About = () => {
     return (
-        <div className={card}>
-            <h1>Welcome to About</h1>
-            <div className={cardBody}>
-                <div className={cardContent}>
-                  <h1>Hola! Soy Nahuel Argañaraz y diseñé este Rick and Morty App</h1>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magni vel est, laboriosam ab enim maiores distinctio similique accusantium porro ullam incidunt quia fuga, explicabo numquam quidem debitis veritatis nesciunt! Enim?</p>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Pariatur consectetur voluptate, quo voluptas consequuntur magnam fugit, inventore placeat aliquam temporibus sapiente? Possimus doloribus dolorum voluptates ea sit laudantium facilis commodi?</p>
+        <div className={style.aboutContainer}>
+            <h2 className={style.aboutTitle}>About Me</h2>
+            <div className={style.aboutContainer}>
+                <p>¡Hola! Soy Nahuel Argañaraz, un apasionado de la programación y la tecnología.</p>
+                <p>¡No dudes en contactarme!</p>
+                <div>
+                    <a className= {style.contactlink} href="https://www.linkedin.com/in/nahuel-arga%C3%B1araz/" target="_blank" rel="noopener noreferrer">
+                        <FaLinkedin className= {style.linkedin}/> LinkedIn
+                    </a>
+                </div>
+                <div>
+                    <a className= {style.contactlink} href="https://wa.me/2616124150" target="_blank" rel="noopener noreferrer">
+                        <FaWhatsapp className= {style.whatsapp} /> WhatsApp
+                    </a>
                 </div>
             </div>
-            
         </div>
     );
 }
+
+export default About;
