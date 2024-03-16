@@ -10,32 +10,29 @@ export default function Card({ origin, status, id, species, gender, image, name,
    const myFavorites = useSelector((state)=>state.myFavorites);
  
    const myChar = {
-      name: name,
-      gender: gender,
-      species: species,
-      id: id,
-      image: image,
+    name: name,
+    species: species,
+    gender: gender,
+    id: id,
+    image: image,
+    onClose:onClose,
    }
 
    useEffect(() => {
-      myFavorites.forEach((fav) => {
-         if (fav.id === id) {
-            setIsFav(true);
-         }
-      });
-   }, [myFavorites]);
+    setIsFav(myFavorites.some(fav => fav.id === id));
+  }, [myFavorites, id]);
 
 
 
-   const handleFavorite = () => {
-      if(isFav){
-         setIsFav(false);
-         dispatch(removeFav(id))
-      }else{
-         setIsFav(true)
-         dispatch(addFav(myChar))
-      }
-   }
+  const handleFavorite = () => {
+    if (isFav) {
+      dispatch(removeFav(id));
+    } else {
+      dispatch(addFav(myChar));
+    }
+    setIsFav(!isFav);
+  };
+   
  
   return (
     <div className={style.container}>
@@ -44,13 +41,9 @@ export default function Card({ origin, status, id, species, gender, image, name,
           <img className={style.image} src={image} alt='' loading="lazy" />
           <button className={style.btn} onClick={() => onClose(id)}>X</button>
         </div>
-        {
-        isFav ? (
-        <button className={style.fav} onClick={handleFavorite}>❤️</button>
-         ) : (
-        <button className={style.fav} onClick={handleFavorite}>🤍</button>
-           )
-             }
+        <button className={style.fav} onClick={handleFavorite}>
+        {isFav ? '❤️' : '🤍'}
+      </button>
         <div className={style.name}>
           <Link to={`/detail/${id}`} className={style.link}>{name}</Link>
         </div>

@@ -16,15 +16,21 @@ function App() {
   const navigate = useNavigate();
   const [access, setAccess] = useState(false);
 
-  const EMAIL = 'nahuel@gmail.com';
-  const PASSWORD = '12345';
+   const EMAIL = 'nahuel@gmail.com';
+  const PASSWORD = '12345'; 
 
-  function login(userData) {
-    if (userData.password === PASSWORD && userData.email === EMAIL) {
-        setAccess(true);
-        navigate('/home');
+  async function login(userData) {
+    try {
+      const { email, password } = userData;
+      const URL = 'http://localhost:3001/rickandmorty/';
+      const response = await axios.get(URL, { params: { email, password } });
+      const { access } = response.data;
+      setAccess(access);
+      access && navigate('/home');
+    } catch (error) {
+      window.alert(error.message);
     }
-}
+  }
 
     function logout() {
      setAccess(false);
@@ -34,27 +40,38 @@ function App() {
       !access && navigate('/');
       }, [access]);
 
- const onSearch = (id) => {
-    if(!isNaN(id)){
-    axios(`http://localhost:3001/rickandmorty/character/${id}`).then(
-      (response) => {
-        if (response.data.name) {
-          if (!characters.find(char => char.id === response.data.id)) {
-            setCharacters((oldChars) => [...oldChars, response.data]);
-          } else {
-            window.alert(`El personaje ${id} ha sido seleccionado`);
-          }
-        } else {
-          window.alert(`¡No hay personajes con este ID!: ${id}`);
-        }
+const onSearch = async (id) => {
+  try {
+    if (!id) {
+      window.alert("¡No se ingreso un ID!");
+      return;
+    }
+    const parsedId = Number(id);
+    if (isNaN(parsedId)) {
+      window.alert("¡El ID ingresado no es válido!");
+      return;
+    }
+    const existe = characters.some((characters) => characters.id === parsedId);
+    if (!existe) {
+      let response = await axios(`http://localhost:3001/rickandmorty/character/${parsedId}`);
+      if (response.data.name) {
+        setCharacters((characters) => [...characters, response.data]);
+      } else {
+        window.alert("¡No hay personajes con este ID!");
       }
-    );
+    } else {
+      window.alert("¡Personaje ya existente!");
+      return;
+    }
+  } catch (error) {
+    console.log(error.message);
   }
 };
 
   const onClose = (id) => {
-    const filterState = characters.filter(characters => characters.id !== parseInt(id));
-    setCharacters(filterState);
+    console.log(id);
+    // const indent = parseInt(id, 10);
+    setCharacters((characters) => characters.filter((el) => el.id !== id));
   };
 
   const onAddRandomCharacter = () => {
@@ -78,7 +95,7 @@ function App() {
     <Route path='/home' element={<Cards characters={characters} onClose={onClose} />} />
     <Route path='/about' element={<About />} />
     <Route path='/detail/:id' element={<Detail/>} />
-    <Route path='/favorites' element={<Favorites />}/>
+    <Route path='/favorites' element={<Favorites/>}/>
     <Route path='*' element={<h1>Not Found</h1>} />
 </Routes>
 </div>
