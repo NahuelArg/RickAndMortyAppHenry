@@ -13,7 +13,7 @@ async function getCharById(req, res){
       image,
       gender
           } = response.data
-          if (name) {
+          if (id) {
             let character= { id, name, gender, species, origin: origin.name, image, status } 
             return res.status(200).send( character )
          }else{

@@ -19,7 +19,7 @@ export default function Card({ origin, status, id, species, gender, image, name,
    }
 
    useEffect(() => {
-    setIsFav(myFavorites.some(fav => fav.id === id));
+    setIsFav(myFavorites.filter(fav => fav.id === id));
   }, [myFavorites, id]);
 
 

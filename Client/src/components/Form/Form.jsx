@@ -1,7 +1,7 @@
 import styles from './Form.module.css'
 import { useState } from 'react';
 import validator from './validation';
-const { imagen, card, form } = styles
+const { card, form } = styles
 
 
 export default function Form({login}) {

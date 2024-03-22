@@ -11,23 +11,23 @@ import Favorites from "../Favorites/Favorites.jsx";
 
 
 function App() {
-  const [characters, setCharacters] = useState([]);
-  const { pathname } = useLocation();
-  const navigate = useNavigate();
-  const [access, setAccess] = useState(false);
-
-   const EMAIL = 'nahuel@gmail.com';
+  const [characters, setCharacters] = useState([]);//ESTADO CHARACTER ES UN ARRAY VACIO
+  const { pathname } = useLocation();//Se saca la constante pathname del hook UseLocation
+  const navigate = useNavigate();// se asigna la constante navigate del hook useNavigate
+  const [access, setAccess] = useState(false);//Se hace un estado de acces con UseState que es valor false
+  const EMAIL = 'nahuel@gmail.com';
   const PASSWORD = '12345'; 
 
   async function login(userData) {
     try {
       const { email, password } = userData;
       const URL = 'http://localhost:3001/rickandmorty/';
-      const response = await axios.get(URL, { params: { email, password } });
-      const { access } = response.data;
+      const response = await axios.get(URL, {params: { email, password } });
+      const  access  = response.data;
       setAccess(access);
       access && navigate('/home');
     } catch (error) {
+      navigate("/")
       window.alert(error.message);
     }
   }
