@@ -17,6 +17,6 @@ server.use((req, res, next) => { //middleware
 
 server.use(express.json());//middleware
 
-server.use("/rickandmorty", myRouter); //middleware
+server.use("/rickandmorty/", myRouter); //middleware
 
 module.exports= (server);
