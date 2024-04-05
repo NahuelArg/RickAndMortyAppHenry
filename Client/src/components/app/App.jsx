@@ -26,7 +26,7 @@ function App() {
  async function login(userData) {
     try {
        const {email, password } = userData;
-       const URL = 'http://localhost:3001/rickandmorty/';
+       const URL = 'http://localhost:3001/rickandmorty/login';
        let response = await axios(URL + `?email=${email}&password=${password}`);
        let { access } = response.data;
        console.log(access);

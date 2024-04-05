@@ -2,16 +2,17 @@ import { ADD_FAVORITE, REMOVED_FAVORITE, FILTER, ORDER } from "../Actions/action
 
 const initialState = {
     myFavorites: [],
-    allCharacters: []
+    allCharacters: [],
 }
 
 const rootReducer = (state = initialState, action) => {
     const { type, payload } = action;
+    console.log(payload);
     switch (type) {
-        case 'ADD_FAV':
-      return { ...state, myFavorites: payload, allCharacters: payload };
+        case ADD_FAVORITE:
+      return { ...state,myFavorites: payload};
 
-      case 'REMOVE_FAV':
+      case REMOVED_FAVORITE:
       return { ...state, myFavorites: payload };
 
         case FILTER:

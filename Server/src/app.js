@@ -1,6 +1,8 @@
 const express= require ("express");
 const server= express();
 const myRouter= require ("./routes/indexRoutes");
+const morgan = require('morgan')
+
 server.use((req, res, next) => { //middleware
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Credentials', 'true');
@@ -14,7 +16,7 @@ server.use((req, res, next) => { //middleware
     );
     next();
  });
-
+server.use(morgan('dev'))
 server.use(express.json());//middleware
 
 server.use("/rickandmorty/", myRouter); //middleware

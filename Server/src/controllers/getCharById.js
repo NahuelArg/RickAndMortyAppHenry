@@ -16,7 +16,8 @@ async function getCharById(req, res){
           if (id) {
             let character= { id, name, gender, species, origin: origin.name, image, status } 
             return res.status(200).send( character )
-         }else{
+         }
+         if(!id){
           return res.status (404).send({message:"Not Found!"})
          }
    } catch (error) {
@@ -24,4 +25,4 @@ async function getCharById(req, res){
    }
   
 }
-module.exports = getCharById
+module.exports = getCharById;

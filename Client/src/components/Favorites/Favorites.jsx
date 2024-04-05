@@ -9,7 +9,7 @@ const { fav, cards } = styles
 
 export default function Favorites(){
  const myFavorites = useSelector((state)=>state.myFavorites);
-
+console.log(myFavorites);
  const dispatch= useDispatch();
 
  const [aux, setAux]= useState(false);
@@ -45,12 +45,14 @@ const handleFilter= (e)=>{
                 {
                 myFavorites?.map((fav)=>(
                     <Card
-                        id={fav.id}
-                        key={fav.id}
-                        name={fav.name}
-                        species={fav.species}
-                        gender={fav.gender} 
-                        image={fav.image} 
+                        id={fav?.id}
+                        key={fav?.id}
+                        name={fav?.name}
+                        species={fav?.species}
+                        gender={fav?.gender} 
+                        image={fav?.image}
+                        fav={true}
+                        onClose={() => handleClose(fav.id)}
                     />
                 ))
                 }
